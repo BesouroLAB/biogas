@@ -1,5 +1,6 @@
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Sidebar } from './components/Sidebar.tsx';
 import { Header } from './components/Header.tsx';
 import { AiAssistant } from './components/AiAssistant.tsx';
@@ -16,7 +17,6 @@ import { SectionEquidadeRacial } from './components/sections/SectionEquidadeRaci
 import { SectionReferencias } from './components/sections/SectionReferencias.tsx';
 
 import * as appData from './data/appData.ts';
-import { translations } from './data/translations.ts';
 import { geminiService } from './services/geminiService.ts';
 import { ChevronDownIcon } from './components/icons/Icons.tsx';
 import { FormattedTextViewer } from './components/FormattedTextViewer.tsx';
@@ -27,16 +27,16 @@ export interface AppFilters {
 }
 
 const App: React.FC = () => {
+    const { t, i18n } = useTranslation();
     const [expanded, setExpanded] = useState<Record<string, boolean>>({});
     const [activeSection, setActiveSection] = useState<string>('visao-geral');
     const [filters, setFilters] = useState<AppFilters>({ region: 'brasil', sourceType: 'all' });
     
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-    const t = translations.pt;
     const navLinks = appData.navStructure.map(item => ({
         ...item,
-        label: t.navLinkLabels[item.id],
+        label: t(`navLinkLabels.${item.id}`),
     }));
 
     const buildContext = (data: any): string => {
@@ -53,16 +53,16 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        const contextData = buildContext(t.reportData);
-        if (contextData && t.aiAssistant?.systemInstruction) {
+        const contextData = buildContext(t('reportData', { returnObjects: true }));
+        if (contextData && t('aiAssistant.systemInstruction')) {
              geminiService.startChat({
-                systemInstruction: t.aiAssistant.systemInstruction,
+                systemInstruction: t('aiAssistant.systemInstruction'),
                 context: contextData,
-                contextPrompt: t.aiAssistant.contextPrompt,
-                initialModelResponse: t.aiAssistant.initialModelResponse,
+                contextPrompt: t('aiAssistant.contextPrompt'),
+                initialModelResponse: t('aiAssistant.initialModelResponse'),
             });
         }
-    }, [t]);
+    }, [t, i18n.language]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -111,7 +111,7 @@ const App: React.FC = () => {
         const needsExpansion = displayText.length > maxLength + tolerance;
 
         if (!needsExpansion) {
-            return <FormattedTextViewer text={displayText} keywords={t.keywords} />;
+            return <FormattedTextViewer text={displayText} keywords={t('keywords', { returnObjects: true })} />;
         }
 
         return (
@@ -119,7 +119,7 @@ const App: React.FC = () => {
                 <div
                     className={`relative overflow-hidden transition-[max-height] duration-700 ease-in-out ${isExpanded ? 'max-h-[200rem]' : 'max-h-60'}`}
                 >
-                    <FormattedTextViewer text={displayText} keywords={t.keywords} />
+                    <FormattedTextViewer text={displayText} keywords={t('keywords', { returnObjects: true })} />
                     
                     {!isExpanded && (
                         <div 
@@ -134,7 +134,7 @@ const App: React.FC = () => {
                     aria-controls={`expandable-text-container-${id}`}
                     className="mt-4 text-teal-400 hover:text-teal-300 font-semibold text-lg focus:outline-none flex items-center transition-colors"
                 >
-                    {isExpanded ? t.buttons.seeLess : t.buttons.seeMore}
+                    {isExpanded ? t('buttons.seeLess') : t('buttons.seeMore')}
                     <ChevronDownIcon className="h-5 w-5 ml-1" isExpanded={isExpanded} />
                 </button>
             </div>
@@ -161,34 +161,34 @@ const App: React.FC = () => {
                         switch (id) {
                             case 'visao-geral':
                                 ComponentToRender = SectionVisaoGeral;
-                                props.data = t.reportData;
+                                props.data = t('reportData', { returnObjects: true });
                                 break;
                             case 'sumario':
                                 ComponentToRender = SectionSumario;
-                                props.data = t.reportData.executiveSummary;
+                                props.data = t('reportData.executiveSummary', { returnObjects: true });
                                 break;
                             case 'pesquisa-completa':
                                 ComponentToRender = SectionPesquisaCompleta;
-                                props.data = t.fullResearchSection;
+                                props.data = t('fullResearchSection', { returnObjects: true });
                                 break;
                             case 'panorama':
                                 ComponentToRender = SectionPanorama;
                                 props.filters = filters;
                                 props.handleFilterChange = handleFilterChange;
                                 props.panoramaData = appData.panoramaData;
-                                props.data = t.reportData.currentScenario;
+                                props.data = t('reportData.currentScenario', { returnObjects: true });
                                 break;
                             case 'tendencias':
                                 ComponentToRender = SectionTendencias;
-                                props.data = t.reportData.trends2030;
+                                props.data = t('reportData.trends2030', { returnObjects: true });
                                 break;
                             case 'players':
                                 ComponentToRender = SectionPlayers;
-                                props.data = t.reportData.playersData;
+                                props.data = t('reportData.playersData', { returnObjects: true });
                                 break;
                             case 'equidade-racial':
                                 ComponentToRender = SectionEquidadeRacial;
-                                props.data = t.reportData.equityData;
+                                props.data = t('reportData.equityData', { returnObjects: true });
                                 break;
                             case 'politicas':
                             case 'mercado':
@@ -197,7 +197,7 @@ const App: React.FC = () => {
                             case 'producao-consumo':
                             case 'comparativo-global':
                                 ComponentToRender = SectionDetailedAnalysis;
-                                const keyMap: Record<string, keyof typeof t.reportData> = {
+                                const keyMap: Record<string, string> = {
                                     'politicas': 'policies',
                                     'mercado': 'marketAndValueChain',
                                     'infra-tech': 'infraAndTech',
@@ -205,15 +205,15 @@ const App: React.FC = () => {
                                     'producao-consumo': 'productionAndConsumption',
                                     'comparativo-global': 'globalComparison'
                                 };
-                                props.data = t.reportData[keyMap[id]];
+                                props.data = t(`reportData.${keyMap[id]}`, { returnObjects: true });
                                 break;
                             case 'roadmap-2030':
                                 ComponentToRender = SectionRoadmap;
-                                props.data = t.reportData.roadmapData;
+                                props.data = t('reportData.roadmapData', { returnObjects: true });
                                 break;
                             case 'referencias':
                                 ComponentToRender = SectionReferencias;
-                                props.data = t.reportData.referencesData;
+                                props.data = t('reportData.referencesData', { returnObjects: true });
                                 break;
                         }
 
@@ -227,7 +227,7 @@ const App: React.FC = () => {
                     })}
                 </main>
             </div>
-            <AiAssistant translations={t.aiAssistant} />
+            <AiAssistant translations={t('aiAssistant', { returnObjects: true })} />
         </div>
     );
 };

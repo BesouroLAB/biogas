@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react-dom": "^19.1.0",
-    "react": "^19.1.0",
     "@google/genai": "^1.10.0",
-    "recharts": "^3.1.0",
-    "marked": "^14.0.0"
+    "i18next": "^25.3.4",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "marked": "^14.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^15.6.1",
+    "recharts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -1,0 +1,148 @@
+{
+    "title": "Projeto Usina de Biogás",
+    "navLinkLabels": {
+        "visao-geral": "Visão Geral",
+        "sumario": "Sumário Executivo",
+        "pesquisa-completa": "Pesquisa Completa",
+        "panorama": "Panorama Atual",
+        "tendencias": "Tendências",
+        "players": "Principais Players",
+        "equidade-racial": "População Negra",
+        "politicas": "Políticas Públicas",
+        "mercado": "Mercado & Valor",
+        "infra-tech": "Infra & Tecnologia",
+        "materias-primas": "Matérias-Primas",
+        "producao-consumo": "Produção & Consumo",
+        "comparativo-global": "Comparativo Global",
+        "roadmap-2030": "Cenários 2030",
+        "referencias": "Referências"
+    },
+    "buttons": {
+        "seeMore": "Ver mais dados",
+        "seeLess": "Ver menos"
+    },
+    "filters": {
+        "title": "Filtros Interativos",
+        "region": {
+            "label": "Região",
+            "options": {
+                "brasil": "Brasil (Todas)",
+                "sudeste": "Sudeste",
+                "sul": "Sul",
+                "nordeste": "Nordeste",
+                "centro_oeste": "Centro-Oeste",
+                "norte": "Norte"
+            }
+        },
+        "sourceType": {
+            "label": "Fonte",
+            "options": {
+                "all": "Todas as Fontes",
+                "saneamento": "Saneamento & RSU",
+                "industria": "Indústria",
+                "agropecuaria": "Agropecuária"
+            }
+        }
+    },
+    "aiAssistant": {
+        "tooltip": "Assistente de IA",
+        "title": "Análise com IA",
+        "placeholder": "Pergunte sobre o mercado de biogás...",
+        "buttonClose": "Fechar",
+        "suggestionTitle": "Experimente perguntar:",
+        "suggestions": [
+            "Resuma os principais desafios do setor",
+            "Qual o potencial de biogás do agronegócio?",
+            "Compare as tecnologias de purificação",
+            "Quais estados lideram a produção?"
+        ],
+        "systemInstruction": "Você é um analista especialista em energia e biogás no Brasil. Suas respostas devem ser informativas, precisas e baseadas exclusivamente no contexto fornecido. Use um tom profissional e amigável. Formate suas respostas usando markdown para melhor legibilidade (listas, negrito, etc.) quando apropriado.",
+        "contextPrompt": "Use o seguinte contexto sobre o setor de biogás no Brasil para responder a todas as minhas perguntas:\n\n--- INÍCIO DO CONTEXTO ---\n{context}\n--- FIM DO CONTEXTO ---",
+        "initialModelResponse": "Entendido. Estou pronto para responder perguntas sobre o biogás no Brasil com base no contexto fornecido. Como posso ajudar?",
+        "errorMessage": "Desculpe, ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde."
+    },
+    "fullResearchSection": {
+        "title": "Acesse a Pesquisa Completa",
+        "description": "Explore a análise detalhada, a metodologia e todas as fontes de dados em nosso documento de pesquisa abrangente.",
+        "buttonText": "Abrir Documento de Pesquisa",
+        "url": "https://docs.google.com/document/d/1LrOziaPesXZ6aF1ft6JUpvJ8ZAF2keEbGMnG9xsRSis/edit?tab=t.0"
+    },
+    "keywords": [
+        "biogás", "biometano", "Lei do Combustível do Futuro", "descarbonização", "upgrading", "purificação", "Petrobrás", "Raízen", "Orizon", "BNDES", "FINEP", "gargalos de infraestrutura", "licenciamento ambiental", "gás natural", "economia circular", "agroindústria", "saneamento", "sucroenergético", "resíduos sólidos urbanos", "RSU", "ANP", "CIBiogás", "ABiogás", "MME", "EPE", "membranas", "Pressure Swing Adsorption", "PSA", "biodigestores", "CSTR", "UASB", "Gás Verde", "clusters", "hubs", "Parcerias Público-Privadas", "PPPs", "hidrogênio verde", "Fundo Clima", "Programa Mais Inovação", "subvenção econômica", "RenovaPR", "ICMS", "crédito presumido", "diferimento", "Conecta Biometano SP", "crédito outorgado", "GO-GÁS", "MS Renovável", "AGEMS", "CAPEX", "OPEX", "prêmio verde", "CBIOs", "CGOBs", "offtake agreements", "PPAs de Gás", "GNC", "GNL", "Ultragaz", "Volkswagen", "Yara", "digestores de lagoa coberta", "modelo canadense", "digestores de mistura completa", "reatores de fluxo ascendente com manta de lodo", "modelo indiano", "modelo chinês", "separação por membranas", "adsorção por oscilação de pressão", "lavagem com água", "water wash", "lavagem química", "UBE Industries", "Evonik", "SEPURAN® Green", "PlanET Biogas Group", "Geofortes", "Rastro Biodigestores", "Tecnipar", "Acqualimp", "vinhaça", "torta de filtro", "dejetos animais", "suinocultura", "avicultura", "bovinocultura", "fração orgânica do lixo", "lodo de esgoto", "ETEs", "corredores verdes", "Ambev", "L'Oréal", "Ternium", "Scania", "Bio-GNL", "REPowerEU", "EU-ETS", "Low Carbon Fuel Standard", "LCFS", "Renewable Fuel Standard", "RFS", "Plano Safra", "Marco do Saneamento", "população negra", "equidade racial", "justiça ambiental", "racismo ambiental", "PNAD Contínua", "DIEESE", "Fundo Baobá", "Black Founders Fund", "Metha Energia"
+    ],
+    "reportData": {
+        "title": "Pesquisa e Análise Estratégica: Biogás Brasil",
+        "subtitle": "Um Panorama do Setor Rumo a 2030",
+        "companyInfo": {
+            "tabs": {
+                "adminCouncil": "Conselho Administrativo",
+                "execCouncil": "Conselho Executivo",
+                "aboutUs": "Quem Somos?"
+            },
+            "adminCouncil": {
+                "title": "Conselho Administrativo",
+                "members": [
+                    "James Whitaker", "Olivia Grant", "Ethan Collins", "Sophia Bennett", "Daniel Hughes"
+                ]
+            },
+            "execCouncil": {
+                "title": "Conselho Executivo",
+                "members": [
+                    "Mason Blakewell", "Harper Linwood", "Griffin Ashford", "Isla Kensington", "Jasper Holloway"
+                ]
+            },
+            "aboutUs": {
+                "title": "Quem Somos?",
+                "text": "Somos uma empresa global comprometida em transformar conhecimento e inovação em soluções sustentáveis para o futuro. Nossa proposta e objetivo para a localização no Brasil é o planejamento e a construção de um moderno complexo de usinas de biogás na América do Sul, utilizando os mais recentes avanços em pesquisa e desenvolvimento.\n\nAcreditamos que energia limpa e tecnologia de ponta caminham juntas para impulsionar o progresso econômico, preservar o meio ambiente e gerar valor duradouro para as comunidades onde atuamos."
+            }
+        },
+        "executiveSummary": {
+            "sectionTitle": "Sumário Executivo",
+            "fullText": "O Brasil vive um ponto de inflexão na transição energética, com o biogás e o biometano emergindo como pilares centrais dessa transformação. Impulsionado por um arcabouço regulatório mais robusto — em especial a Lei do Combustível do Futuro — e pela urgência da descarbonização, o setor avança rapidamente, convertendo resíduos em ativos energéticos de alto valor.\n\nO cenário é reforçado por movimentos estratégicos de gigantes como Petrobrás, Raízen e Orizon, além do aumento expressivo de investimentos de fundos e agentes financeiros. A criação de um mercado cativo para o biometano a partir de 2026, somada ao amadurecimento das tecnologias de purificação e à monetização dos atributos ambientais do gás renovável, estabelece bases sólidas para o crescimento.\n\nEntretanto, a consolidação desse potencial depende de superar gargalos estruturais, como a limitada malha de gasodutos, a falta de padronização no licenciamento ambiental e a necessidade de manter a competitividade frente ao gás natural fóssil.\n\nAté 2030, a perspectiva é posicionar o Brasil como líder global não apenas em produção, mas como referência em economia circular, integrando de forma sinérgica o biometano à agroindústria e ao saneamento.\n\nCom a expansão de plantas em escala industrial e a conversão de passivos ambientais em energia, o país pode transformar seu imenso potencial técnico em motor estratégico para o desenvolvimento sustentável e a segurança energética.",
+            "highlightsTitle": "Destaques do Setor",
+            "highlights": [
+                {
+                    "id": "potential",
+                    "label": "Potencial de Mercado",
+                    "value": "R$ 100 Bi",
+                    "icon": "BanknotesIcon",
+                    "tooltip": "Refere-se ao valor econômico total que o setor de biogás e biometano pode movimentar anualmente, incluindo a venda do gás, biofertilizantes, créditos de carbono (CBIOs) e a geração de empregos e serviços em toda a cadeia produtiva."
+                },
+                {
+                    "id": "tech",
+                    "label": "Potencial Técnico",
+                    "value": "97 Bi Nm³/ano",
+                    "icon": "PlanetIcon",
+                    "tooltip": "Indica o volume máximo teórico de biogás que poderia ser produzido anualmente no Brasil se todos os resíduos orgânicos disponíveis (no agronegócio, saneamento e indústria) fossem aproveitados com a tecnologia atual. \"Nm³\" significa \"Normal Metro Cúbico\", uma unidade de medida padrão para gases."
+                },
+                {
+                    "id": "investment",
+                    "label": "Investimento em Inovação",
+                    "value": "R$ 60+ Bi",
+                    "icon": "RocketLaunchIcon",
+                    "tooltip": "Representa a projeção de investimentos (CAPEX) de fontes públicas (BNDES, FINEP) e privadas destinados à construção de novas plantas, desenvolvimento de tecnologias, infraestrutura e inovação no setor de biogás até 2030."
+                }
+            ]
+        },
+        "equityData": {
+            "title": "População Negra: Desafios e Oportunidades",
+            "intro": "O setor de biogás avança como um pilar da transição energética no Brasil, mas essa expansão ocorre em meio a uma profunda lacuna: a ausência de dados sobre a participação da população negra. Essa \'zona cega\' invisibiliza a equidade racial, arriscando aprofundar desigualdades históricas na nova economia verde.\n\nAnálises baseadas em dados de fontes como o IBGE revelam um cenário de sub-representação drástica. Estima-se que **menos de 10% dos cargos de liderança** no setor sejam ocupados por pessoas negras, em contraste com sua representação de 56,7% na população brasileira. Esse \'funil da desigualdade\' se agrava por barreiras sistêmicas no acesso a capital, redes de contato e oportunidades de desenvolvimento.\n\nPara que a transição energética seja verdadeiramente justa e sustentável, é crucial que o setor adote a equidade racial como um pilar estratégico, transformando o biogás não apenas em uma fonte de energia limpa, mas em um motor de desenvolvimento inclusivo.",
+            "barriers": {
+                "title": "Barreiras Estruturais e Sistêmicas",
+                "text": "A sub-representação da população negra no setor de biogás não é resultado de escolhas individuais ou falta de talento, mas sim a consequência de barreiras estruturais e sistêmicas profundamente enraizadas na sociedade e no mercado brasileiro. Essas barreiras operam em múltiplos níveis, desde o acesso a recursos financeiros até a construção de redes profissionais, criando um ambiente que, por padrão, favorece a perpetuação de um status quo homogêneo.\n\nA primeira e mais tangível barreira é o acesso a capital. Empreendedores negros enfrentam uma desvantagem desproporcional na obtenção de crédito e investimento. O Projeto de Lei Complementar (PLP) 215/2021 reconhece essa disparidade, citando que empreendedores negros têm pedidos de financiamento negados com frequência três vezes maior que os brancos. Essa dificuldade afeta a capacidade de escalar projetos de biogás, que são intensivos em capital.\n\nA segunda barreira é o acesso a redes de contato (networking). O setor de energia opera com base em relações de confiança construídas em conferências e comitês técnicos. A homogeneidade racial nos círculos de liderança existentes cria \'clubes fechados\', onde as oportunidades circulam predominantemente entre pares. Essa exclusão se manifesta de forma visível na representatividade em eventos setoriais, onde uma análise da programação revela uma ausência quase total de palestrantes e mediadores negros, reforçando estereótipos e privando o setor de perspectivas diversas.",
+                "table": {
+                    "title": "Tabela: Scorecard de Transparência e Ações de DEI nos Principais Players",
+                    "headers": ["Empresa", "Relatório Sustentabilidade", "Dados Raciais (Equipe)", "Dados Raciais (Liderança)", "Metas Raciais Públicas", "Programa Trainee Afirmativo", "Compras Inclusivas"],
+                    "rows": [
+                        { "company": "Raízen", "sustainabilityReport": "Sim", "workforceData": "Não Específico", "leadershipData": "Apenas Gênero", "publicGoals": "Não", "affirmativeProgram": "Não Específico", "inclusivePurchasing": "Não Específico" },
+                        { "company": "Orizon VR", "sustainabilityReport": "Sim", "workforceData": "Não Específico", "leadershipData": "Não Específico", "publicGoals": "Não", "affirmativeProgram": "Não Específico", "inclusivePurchasing": "Não Específico" },
+                        { "company": "Gás Verde (Urca)", "sustainabilityReport": "Sim", "workforceData": "Parcial (Metas em elaboração)", "leadershipData": "Parcial (Metas em elaboração)", "publicGoals": "Não", "affirmativeProgram": "Não Específico", "inclusivePurchasing": "Não Específico" },
+                        { "company": "Solví", "sustainabilityReport": "Sim", "workforceData": "Não", "leadershipData": "Não", "publicGoals": "Não", "affirmativeProgram": "Não Específico", "inclusivePurchasing": "Não Específico" },
+                        { "company": "Geo Biogás & Carbon", "sustainabilityReport": "Sim", "workforceData": "Não Específico", "leadershipData": "Não Específico", "publicGoals": "Não", "affirmativeProgram": "Não Específico", "inclusivePurchasing": "Sim (Mencionado)" }
+                    ]
+                }
+            },
+            "buttonText": "Mais Informações Em Breve"
+        }
+    }
+}

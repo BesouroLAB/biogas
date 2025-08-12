@@ -1,0 +1,32 @@
+{
+  "title": "Biogas Plant Project",
+  "navLinkLabels": {
+    "visao-geral": "Overview",
+    "sumario": "Executive Summary",
+    "pesquisa-completa": "Complete Research",
+    "panorama": "Current Panorama",
+    "tendencias": "Trends",
+    "players": "Key Players",
+    "equidade-racial": "Black Population",
+    "politicas": "Public Policies",
+    "mercado": "Market & Value",
+    "infra-tech": "Infra & Technology",
+    "materias-primas": "Raw Materials",
+    "producao-consumo": "Production & Consumption",
+    "comparativo-global": "Global Comparison",
+    "roadmap-2030": "2030 Scenarios",
+    "referencias": "References"
+  },
+  "buttons": {
+    "seeMore": "See more data",
+    "seeLess": "See less"
+  },
+  "sidebar": {
+    "title": "Biogas Brazil",
+    "logoAlt": "Germany-Brazil Cooperation Logo",
+    "footer": {
+      "developedBy": "Developed by Tiago Fernandes | BesouroLAB",
+      "copyright": "2025 &copy;All Rights Reserved"
+    }
+  }
+}

@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      // Polyfill 'process' para evitar um erro de "process is not defined" em ambientes de navegador.
+      // O código que usa `process.env.API_KEY` no estilo Node.js fará com que o aplicativo falhe ao ser
+      // implantado em hosts estáticos como o Vercel. Este script garante que o aplicativo possa carregar.
+      // A chave de API em si deve ser exposta ao código do lado do cliente através das configurações
+      // da plataforma de hospedagem.
+      if (typeof window.process === 'undefined') {
+        window.process = { env: {} };
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
     tailwind.config = {
@@ -57,7 +67,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-gray-900 font-sans">
     <div id="root"></div>
