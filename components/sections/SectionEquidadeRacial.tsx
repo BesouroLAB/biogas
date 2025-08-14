@@ -1,78 +1,137 @@
-
 import React from 'react';
-import { FormattedTextViewer } from '../FormattedTextViewer.tsx';
+import { UserGroupIcon, CheckCircleIcon, XCircleIcon, InformationCircleIcon, UserIcon } from '../icons/Icons.tsx';
+import { TabbedSection } from '../TabbedSection.tsx';
 import { Table } from '../Table.tsx';
-import { UserGroupIcon, CheckCircleIcon, XCircleIcon, InformationCircleIcon } from '../icons/Icons.tsx';
+import { FormattedTextViewer } from '../FormattedTextViewer.tsx';
 
-const renderScorecardCell = (value: string) => {
-    switch(value) {
-        case "Sim":
-        case "Sim (Mencionado)":
-            return <div className="flex justify-center"><CheckCircleIcon className="h-7 w-7 text-green-400" /></div>;
-        case "Não":
-            return <div className="flex justify-center"><XCircleIcon className="h-7 w-7 text-red-400" /></div>;
-        case "Não Específico":
-             return <div className="flex justify-center"><XCircleIcon className="h-7 w-7 text-gray-500" /></div>;
-        case "Parcial (Metas em elaboração)":
-            return <div className="flex justify-center" title={value}><InformationCircleIcon className="h-7 w-7 text-yellow-400" /></div>;
-        case "Apenas Gênero":
-            return <div className="flex justify-center" title={value}><InformationCircleIcon className="h-7 w-7 text-blue-400" /></div>;
-        default:
-            return value;
-    }
-}
+const KeyPointCard: React.FC<{ title: string; text: string; }> = ({ title, text }) => (
+    <div className="bg-gray-800/60 p-6 rounded-lg ring-1 ring-white/10">
+        <h4 className="text-xl font-bold text-yellow-300 mb-2">{title}</h4>
+        <p className="text-gray-300 text-base">{text}</p>
+    </div>
+);
+
+const MonitoringSuggestionCard: React.FC<{ title: string; text: string; }> = ({ title, text }) => (
+    <div className="bg-gray-800/60 p-6 rounded-lg ring-1 ring-white/10">
+        <h4 className="text-xl font-bold text-cyan-300 mb-2">{title}</h4>
+        <p className="text-gray-300 text-base">{text}</p>
+    </div>
+);
+
+const ScorecardTable: React.FC<{ data: any }> = ({ data }) => {
+    const renderCellContent = (value: boolean | string) => {
+        if (typeof value === 'boolean') {
+            return value ? <CheckCircleIcon className="h-7 w-7 text-green-400 mx-auto" /> : <XCircleIcon className="h-7 w-7 text-red-400 mx-auto" />;
+        }
+        const text = data.legend[value] || value;
+        const color = value === 'partial' ? 'text-yellow-400' : 'text-gray-300';
+        return <span className={color}>{text}</span>;
+    };
+
+    const rows = data.rows.map((row: any) => [
+        row.name,
+        renderCellContent(row.sustainabilityReport),
+        renderCellContent(row.workforceData),
+        renderCellContent(row.leadershipData),
+        renderCellContent(row.publicGoals),
+        renderCellContent(row.affirmativeProgram),
+        renderCellContent(row.inclusivePurchasing),
+    ]);
+
+    return <Table headers={data.headers} rows={rows} />;
+};
 
 export const SectionEquidadeRacial: React.FC<any> = ({ data, t }) => {
-    if (!data || !data.title || !data.intro) {
-        return null;
+    if (!data || !data.title) {
+        return (
+            <div className="flex items-center justify-center min-h-[40vh] bg-gray-800/50 rounded-lg p-8 ring-1 ring-white/10">
+                <p className="text-3xl font-bold text-gray-500">Em Breve</p>
+            </div>
+        );
     }
 
-    const { barriers } = data;
-    const tableRows = barriers?.table?.rows.map((row: any) => [
-        row.company,
-        renderScorecardCell(row.sustainabilityReport),
-        renderScorecardCell(row.workforceData),
-        renderScorecardCell(row.leadershipData),
-        renderScorecardCell(row.publicGoals),
-        renderScorecardCell(row.affirmativeProgram),
-        renderScorecardCell(row.inclusivePurchasing),
-    ]) || [];
-
+    const tabs = [
+        {
+            title: data.tabs.methodology,
+            content: (
+                <div className="bg-gray-800/60 p-8 rounded-lg ring-1 ring-white/10">
+                    <h3 className="text-3xl font-semibold text-gray-200 mb-4">{data.methodology.title}</h3>
+                    <FormattedTextViewer text={data.methodology.content} keywords={t.keywords} />
+                </div>
+            )
+        },
+        {
+            title: data.tabs.leadership,
+            content: (
+                <div className="bg-gray-800/60 p-8 rounded-lg ring-1 ring-white/10 space-y-6">
+                    <h3 className="text-3xl font-semibold text-gray-200 mb-4">{data.leadership.title}</h3>
+                    <FormattedTextViewer text={data.leadership.content} keywords={t.keywords} />
+                    <Table title={data.leadership.table.title} headers={data.leadership.table.headers} rows={data.leadership.table.rows} />
+                </div>
+            )
+        },
+        {
+            title: data.tabs.scorecard,
+            content: (
+                 <div className="bg-gray-800/60 p-8 rounded-lg ring-1 ring-white/10">
+                     <h3 className="text-3xl font-semibold text-gray-200 mb-4">{data.scorecard.title}</h3>
+                     <ScorecardTable data={data.scorecard} />
+                 </div>
+            )
+        },
+        {
+            title: data.tabs.ecosystem,
+            content: (
+                <div className="bg-gray-800/60 p-8 rounded-lg ring-1 ring-white/10">
+                    <h3 className="text-3xl font-semibold text-gray-200 mb-4">{data.ecosystem.title}</h3>
+                    <FormattedTextViewer text={data.ecosystem.content} keywords={t.keywords} />
+                </div>
+            )
+        }
+    ];
 
     return (
-        <div className="bg-gray-800/60 rounded-2xl p-8 lg:p-12 ring-1 ring-purple-500/30 shadow-2xl shadow-purple-900/50 my-8">
-            <h2 className="text-4xl font-bold text-purple-300 mb-6 flex items-center justify-center gap-4 text-center">
-                <UserGroupIcon className="h-10 w-10 flex-shrink-0"/> 
+        <div className="space-y-12">
+            <h2 className="text-4xl font-bold text-teal-400 mb-4 border-l-4 border-teal-400 pl-4 flex items-center gap-4">
+                <UserGroupIcon className="h-9 w-9" />
                 <span>{data.title}</span>
             </h2>
-            <div className="text-left max-w-4xl mx-auto space-y-8">
-                <FormattedTextViewer text={data.intro} keywords={t.keywords} />
-
-                {barriers && (
-                    <div className="pt-6">
-                        <h3 className="text-3xl font-bold text-purple-200 mb-4">{barriers.title}</h3>
-                        <FormattedTextViewer text={barriers.text} keywords={t.keywords} />
-                        
-                        {barriers.table && (
-                            <Table 
-                                title={barriers.table.title}
-                                headers={barriers.table.headers}
-                                rows={tableRows}
-                            />
-                        )}
-                    </div>
-                )}
+            <div className="prose prose-lg prose-invert max-w-none text-gray-300">
+                <p>{data.intro}</p>
             </div>
 
-            {data.buttonText && (
-                <div className="text-center mt-10">
-                    <button
-                        disabled
-                        className="inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-gray-400 text-xl font-bold rounded-lg cursor-not-allowed"
-                        aria-label={data.buttonText}
-                    >
-                        {data.buttonText}
-                    </button>
+            <div className="space-y-6">
+                <h3 className="text-3xl font-semibold text-gray-200 text-center">{data.keyPoints.title}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {data.keyPoints.points.map((point: any) => (
+                        <KeyPointCard key={point.id} title={point.title} text={point.text} />
+                    ))}
+                </div>
+            </div>
+
+            <div className="space-y-6 pt-8">
+                 <h3 className="text-3xl font-semibold text-gray-200 text-center">{data.monitoringSuggestions.title}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {data.monitoringSuggestions.suggestions.map((suggestion: any) => (
+                        <MonitoringSuggestionCard key={suggestion.id} title={suggestion.title} text={suggestion.text} />
+                    ))}
+                </div>
+            </div>
+
+            <div className="pt-8">
+                <TabbedSection tabs={tabs} />
+            </div>
+            
+            {data.destaques && (
+                 <div className="pt-8">
+                    <h3 className="text-3xl font-semibold text-gray-200 text-center mb-6">{data.destaques.title}</h3>
+                    <div className="max-w-md mx-auto bg-gray-800/60 rounded-xl p-6 ring-1 ring-white/10 flex flex-col items-center text-center">
+                        <div className="p-4 bg-gray-700/80 rounded-full mb-3 ring-1 ring-white/10">
+                            <UserIcon className="h-10 w-10 text-gray-300" />
+                        </div>
+                        <h4 className="text-2xl font-bold text-yellow-300">{data.destaques.people[0].name}</h4>
+                        <p className="text-lg text-gray-400">{data.destaques.people[0].role}</p>
+                    </div>
                 </div>
             )}
         </div>

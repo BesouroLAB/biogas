@@ -1,16 +1,18 @@
 
+
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { MenuIcon, XIcon } from './icons/Icons.tsx';
-import LanguageSwitcher from './LanguageSwitcher.tsx';
+import { LanguageSwitcher } from './LanguageSwitcher.tsx';
+import { Language } from '../App.tsx';
 
 interface HeaderProps {
     navLinks: Array<{ id: string; label: string; icon: React.FC<{ className?: string }> }>;
     onNavItemClick: (id: string) => void;
+    currentLanguage: Language;
+    onLanguageChange: (lang: Language) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ navLinks, onNavItemClick }) => {
-    const { t } = useTranslation();
+export const Header: React.FC<HeaderProps> = ({ navLinks, onNavItemClick, currentLanguage, onLanguageChange }) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const FirstIcon = navLinks[0]?.icon;
 
@@ -40,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ navLinks, onNavItemClick }) => {
 
                         {/* Desktop Title */}
                         <div className="hidden lg:flex items-center">
-                            <h2 className="text-xl font-semibold text-gray-200 uppercase tracking-wider">{t('title')}</h2>
+                            <h2 className="text-xl font-semibold text-gray-200 uppercase tracking-wider">PAINEL ESTRATÉGICO | BIOGÁS ALEMANHA-BRASIL</h2>
                         </div>
 
                         {/* Mobile Title */}
@@ -49,7 +51,13 @@ export const Header: React.FC<HeaderProps> = ({ navLinks, onNavItemClick }) => {
                             <h1 className="text-xl font-bold ml-3 text-white">Biogás Brasil</h1>
                         </div>
                     </div>
-                    <LanguageSwitcher />
+
+                    <div className="flex items-center">
+                        <LanguageSwitcher 
+                            currentLanguage={currentLanguage}
+                            onLanguageChange={onLanguageChange}
+                        />
+                    </div>
                 </div>
             </header>
             

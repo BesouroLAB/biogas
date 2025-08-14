@@ -22,9 +22,9 @@ export const SectionRoadmap: React.FC<any> = ({ data }) => {
                 <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gray-700/50" />
                 
                 <div className="relative flex flex-col md:flex-row justify-center items-stretch gap-8 md:gap-4">
-                    <RoadmapNode scenario={data.scenarios.conservative} icon={icons.conservative} />
-                    <RoadmapNode scenario={data.scenarios.realistic} icon={icons.realistic} isCentral />
-                    <RoadmapNode scenario={data.scenarios.optimistic} icon={icons.optimistic} />
+                    <RoadmapNode scenario={data.scenarios.conservative} icon={icons.conservative} buttonLabel={data.justificationButton} />
+                    <RoadmapNode scenario={data.scenarios.realistic} icon={icons.realistic} isCentral buttonLabel={data.justificationButton} />
+                    <RoadmapNode scenario={data.scenarios.optimistic} icon={icons.optimistic} buttonLabel={data.justificationButton} />
                 </div>
             </div>
         </div>

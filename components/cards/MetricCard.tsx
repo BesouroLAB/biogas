@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { XIcon } from '../icons/Icons.tsx';
 

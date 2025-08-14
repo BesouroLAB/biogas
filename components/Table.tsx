@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface TableProps {
@@ -12,7 +11,7 @@ export const Table: React.FC<TableProps> = ({ title, headers, rows }) => {
         <div className="my-8">
             {title && <h5 className="text-xl font-semibold text-gray-200 mb-4">{title}</h5>}
             <div className="overflow-x-auto rounded-lg ring-1 ring-gray-700">
-                <table className="w-full text-lg text-left text-gray-400">
+                <table className="min-w-full w-full text-lg text-left text-gray-400">
                     <thead className="text-base text-gray-300 uppercase bg-gray-700/50">
                         <tr>
                             {headers.map((header) => (

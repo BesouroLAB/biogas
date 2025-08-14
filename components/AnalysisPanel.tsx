@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { TabbedSection } from './TabbedSection.tsx';
@@ -68,8 +66,8 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ t, data, filters, 
         title: data.analysisTabs.overview,
         content: (
             <ChartCard title={getChartTitle(data.chartTitles.distribution, filters.region, 'all')}>
-                <div className="flex flex-col lg:flex-row justify-center items-center gap-8">
-                    <div className="w-full lg:w-1/2 h-[350px]">
+                <div className="flex flex-col justify-center items-center gap-8">
+                    <div className="w-full h-[350px]">
                         <h4 className="text-xl font-semibold text-center text-gray-300 mb-4">{data.chartTitles.biogasSources}</h4>
                         <ResponsiveContainer width="100%" height={300} key={`${filters.region}-${filters.sourceType}`}>
                             <PieChart>
@@ -87,8 +85,21 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ t, data, filters, 
                             </PieChart>
                         </ResponsiveContainer>
                     </div>
-                    <div className="w-full lg:w-1/2">
-                        {renderExpandableText('panorama-distribution', data.fullText.distribution, 250)}
+                    <div className="w-full space-y-6">
+                        <h4 className="text-xl font-semibold text-center text-gray-300">{data.distributionAnalysis.title}</h4>
+                        {data.distributionAnalysis.sections.map((section: any, sIndex: number) => (
+                            <div key={sIndex}>
+                                <h5 className="font-bold text-lg text-teal-300 mb-3 text-center lg:text-left">{section.title}</h5>
+                                <div className="space-y-3">
+                                    {section.cards.map((card: any, cIndex: number) => (
+                                        <div key={cIndex} className="bg-gray-900/50 p-4 rounded-lg ring-1 ring-white/10">
+                                            <p className="font-semibold text-gray-200">{card.title}</p>
+                                            <p className="text-gray-400 text-base">{card.text}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </ChartCard>

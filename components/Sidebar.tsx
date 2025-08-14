@@ -2,7 +2,6 @@
 
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface NavItemProps {
     icon: React.ReactNode;
@@ -32,7 +31,6 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ navLinks, activeSection, onNavItemClick }) => {
-    const { t } = useTranslation();
     const FirstIcon = navLinks[0]?.icon;
 
     return (
@@ -57,11 +55,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ navLinks, activeSection, onNav
                 <div className="flex flex-col mb-12 px-2 flex-shrink-0">
                     <div className="flex items-center">
                         {FirstIcon && <FirstIcon className="h-10 w-10 text-teal-400" />}
-                        <h1 className="text-3xl font-bold ml-4 text-white">{t('sidebar.title')}</h1>
+                        <h1 className="text-3xl font-bold ml-4 text-white">Biogás Brasil</h1>
                     </div>
                     <img
                         src="https://i.imgur.com/ojSEmGp.png"
-                        alt={t('sidebar.logoAlt')}
+                        alt="Logo Cooperação Alemanha-Brasil"
                         className="mt-6 w-3/4 mx-auto object-contain mix-blend-lighten"
                     />
                 </div>
@@ -78,8 +76,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ navLinks, activeSection, onNav
                 </nav>
                 <div className="mt-auto pt-4 flex-shrink-0 flex items-center justify-between">
                     <div className="text-gray-500 text-sm space-y-1 text-left">
-                         <p>{t('sidebar.footer.developedBy')}</p>
-                         <p>{t('sidebar.footer.copyright')}</p>
+                         <p>Desenvolvido por Tiago Fernandes | BesouroLAB</p>
+                         <p>2025 &copy;Todos os Direitos Reservados</p>
                     </div>
                 </div>
             </div>

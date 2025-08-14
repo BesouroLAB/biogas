@@ -23,14 +23,43 @@ export const InfoTabs: React.FC<{ data: any }> = ({ data }) => {
             case 'adminCouncil':
             case 'execCouncil':
                 const councilData = data[activeTab];
+                if (!councilData || !councilData.members) return null;
+
+                const is2D = Array.isArray(councilData.members[0]);
+
+                if (is2D) {
+                    const isAdminCouncil = activeTab === 'adminCouncil';
+                    const gridClasses = isAdminCouncil
+                        ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6'
+                        : 'grid-cols-2 sm:grid-cols-4 md:grid-cols-4';
+
+                    return (
+                        <div className="w-full space-y-6 p-4">
+                            {(councilData.members as string[][]).map((row, rowIndex) => (
+                                <div key={rowIndex} className={`grid ${gridClasses} gap-x-6 gap-y-4 text-center`}>
+                                    {row.map((name: string) => (
+                                        <div key={name} className="flex flex-col items-center">
+                                            <div className="p-3 bg-gray-700/80 rounded-full mb-2 ring-1 ring-white/10">
+                                                 <UserIcon className="h-7 w-7 text-gray-400" />
+                                            </div>
+                                            <span className="font-medium text-sm text-gray-300">{name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    );
+                }
+
+                // Fallback for 1D array
                 return (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-6 gap-y-4 text-center p-4">
-                        {councilData.members.map((name: string) => (
+                        {(councilData.members as string[]).map((name: string) => (
                             <div key={name} className="flex flex-col items-center">
                                 <div className="p-3 bg-gray-700/80 rounded-full mb-2 ring-1 ring-white/10">
                                      <UserIcon className="h-7 w-7 text-gray-400" />
                                 </div>
-                                <span className="font-medium text-lg text-gray-300">{name}</span>
+                                <span className="font-medium text-sm text-gray-300">{name}</span>
                             </div>
                         ))}
                     </div>

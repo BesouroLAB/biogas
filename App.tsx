@@ -1,6 +1,6 @@
 
+
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Sidebar } from './components/Sidebar.tsx';
 import { Header } from './components/Header.tsx';
 import { AiAssistant } from './components/AiAssistant.tsx';
@@ -11,12 +11,19 @@ import { SectionPesquisaCompleta } from './components/sections/SectionPesquisaCo
 import { SectionPanorama } from './components/sections/SectionPanorama.tsx';
 import { SectionTendencias } from './components/sections/SectionTendencias.tsx';
 import { SectionPlayers } from './components/sections/SectionPlayers.tsx';
-import { SectionDetailedAnalysis } from './components/sections/SectionDetailedAnalysis.tsx';
+import { SectionPoliticas } from './components/sections/SectionPoliticas.tsx';
+import { SectionMercado } from './components/sections/SectionMercado.tsx';
+import { SectionInfraTech } from './components/sections/SectionInfraTech.tsx';
 import { SectionRoadmap } from './components/sections/SectionRoadmap.tsx';
 import { SectionEquidadeRacial } from './components/sections/SectionEquidadeRacial.tsx';
 import { SectionReferencias } from './components/sections/SectionReferencias.tsx';
+import { SectionMateriasPrimas } from './components/sections/SectionMateriasPrimas.tsx';
+import { SectionProducaoConsumo } from './components/sections/SectionProducaoConsumo.tsx';
+import { SectionGlobalComparison } from './components/sections/SectionGlobalComparison.tsx';
+
 
 import * as appData from './data/appData.ts';
+import { translations } from './data/translations.ts';
 import { geminiService } from './services/geminiService.ts';
 import { ChevronDownIcon } from './components/icons/Icons.tsx';
 import { FormattedTextViewer } from './components/FormattedTextViewer.tsx';
@@ -26,17 +33,30 @@ export interface AppFilters {
   sourceType: keyof (typeof appData.panoramaData)['brasil']['keyMetrics'];
 }
 
+export type Language = 'pt' | 'en' | 'de';
+
+
 const App: React.FC = () => {
-    const { t, i18n } = useTranslation();
     const [expanded, setExpanded] = useState<Record<string, boolean>>({});
     const [activeSection, setActiveSection] = useState<string>('visao-geral');
     const [filters, setFilters] = useState<AppFilters>({ region: 'brasil', sourceType: 'all' });
+    const [language, setLanguage] = useState<Language>('pt');
     
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
+    const t = translations[language];
+
+    const handleLanguageChange = (lang: Language) => {
+        if (lang === 'pt') {
+            setLanguage(lang);
+        } else {
+            alert(t.languageSwitcher.comingSoon);
+        }
+    };
+
     const navLinks = appData.navStructure.map(item => ({
         ...item,
-        label: t(`navLinkLabels.${item.id}`),
+        label: t.navLinkLabels[item.id],
     }));
 
     const buildContext = (data: any): string => {
@@ -53,16 +73,16 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        const contextData = buildContext(t('reportData', { returnObjects: true }));
-        if (contextData && t('aiAssistant.systemInstruction')) {
+        const contextData = buildContext(t.reportData);
+        if (contextData && t.aiAssistant?.systemInstruction) {
              geminiService.startChat({
-                systemInstruction: t('aiAssistant.systemInstruction'),
+                systemInstruction: t.aiAssistant.systemInstruction,
                 context: contextData,
-                contextPrompt: t('aiAssistant.contextPrompt'),
-                initialModelResponse: t('aiAssistant.initialModelResponse'),
+                contextPrompt: t.aiAssistant.contextPrompt,
+                initialModelResponse: t.aiAssistant.initialModelResponse,
             });
         }
-    }, [t, i18n.language]);
+    }, [t]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -111,7 +131,7 @@ const App: React.FC = () => {
         const needsExpansion = displayText.length > maxLength + tolerance;
 
         if (!needsExpansion) {
-            return <FormattedTextViewer text={displayText} keywords={t('keywords', { returnObjects: true })} />;
+            return <FormattedTextViewer text={displayText} keywords={t.keywords} />;
         }
 
         return (
@@ -119,7 +139,7 @@ const App: React.FC = () => {
                 <div
                     className={`relative overflow-hidden transition-[max-height] duration-700 ease-in-out ${isExpanded ? 'max-h-[200rem]' : 'max-h-60'}`}
                 >
-                    <FormattedTextViewer text={displayText} keywords={t('keywords', { returnObjects: true })} />
+                    <FormattedTextViewer text={displayText} keywords={t.keywords} />
                     
                     {!isExpanded && (
                         <div 
@@ -134,7 +154,7 @@ const App: React.FC = () => {
                     aria-controls={`expandable-text-container-${id}`}
                     className="mt-4 text-teal-400 hover:text-teal-300 font-semibold text-lg focus:outline-none flex items-center transition-colors"
                 >
-                    {isExpanded ? t('buttons.seeLess') : t('buttons.seeMore')}
+                    {isExpanded ? t.buttons.seeLess : t.buttons.seeMore}
                     <ChevronDownIcon className="h-5 w-5 ml-1" isExpanded={isExpanded} />
                 </button>
             </div>
@@ -152,6 +172,8 @@ const App: React.FC = () => {
                 <Header 
                     navLinks={navLinks} 
                     onNavItemClick={handleNavClick}
+                    currentLanguage={language}
+                    onLanguageChange={handleLanguageChange}
                 />
                 <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-900 p-6 lg:p-8 space-y-16">
                     {navLinks.map(({ id }) => {
@@ -161,59 +183,66 @@ const App: React.FC = () => {
                         switch (id) {
                             case 'visao-geral':
                                 ComponentToRender = SectionVisaoGeral;
-                                props.data = t('reportData', { returnObjects: true });
+                                props.data = t.reportData;
                                 break;
                             case 'sumario':
                                 ComponentToRender = SectionSumario;
-                                props.data = t('reportData.executiveSummary', { returnObjects: true });
+                                props.data = t.reportData.executiveSummary;
                                 break;
                             case 'pesquisa-completa':
                                 ComponentToRender = SectionPesquisaCompleta;
-                                props.data = t('fullResearchSection', { returnObjects: true });
+                                props.data = t.fullResearchSection;
                                 break;
                             case 'panorama':
                                 ComponentToRender = SectionPanorama;
                                 props.filters = filters;
                                 props.handleFilterChange = handleFilterChange;
                                 props.panoramaData = appData.panoramaData;
-                                props.data = t('reportData.currentScenario', { returnObjects: true });
+                                props.data = t.reportData.currentScenario;
                                 break;
                             case 'tendencias':
                                 ComponentToRender = SectionTendencias;
-                                props.data = t('reportData.trends2030', { returnObjects: true });
+                                props.data = t.reportData.trends2030;
                                 break;
                             case 'players':
                                 ComponentToRender = SectionPlayers;
-                                props.data = t('reportData.playersData', { returnObjects: true });
+                                props.data = t.reportData.playersData;
                                 break;
                             case 'equidade-racial':
                                 ComponentToRender = SectionEquidadeRacial;
-                                props.data = t('reportData.equityData', { returnObjects: true });
+                                props.data = t.reportData.equityData;
                                 break;
                             case 'politicas':
+                                ComponentToRender = SectionPoliticas;
+                                props.data = t.reportData.policies;
+                                break;
                             case 'mercado':
+                                ComponentToRender = SectionMercado;
+                                props.data = t.reportData.marketAndValueChain;
+                                break;
                             case 'infra-tech':
+                                ComponentToRender = SectionInfraTech;
+                                props.data = t.reportData.infraAndTech;
+                                break;
                             case 'materias-primas':
+                                ComponentToRender = SectionMateriasPrimas;
+                                props.data = t.reportData.rawMaterialsAndEfficiency;
+                                break;
                             case 'producao-consumo':
+                                ComponentToRender = SectionProducaoConsumo;
+                                props.data = t.reportData.productionAndConsumption;
+                                break;
                             case 'comparativo-global':
-                                ComponentToRender = SectionDetailedAnalysis;
-                                const keyMap: Record<string, string> = {
-                                    'politicas': 'policies',
-                                    'mercado': 'marketAndValueChain',
-                                    'infra-tech': 'infraAndTech',
-                                    'materias-primas': 'rawMaterialsAndEfficiency',
-                                    'producao-consumo': 'productionAndConsumption',
-                                    'comparativo-global': 'globalComparison'
-                                };
-                                props.data = t(`reportData.${keyMap[id]}`, { returnObjects: true });
+                                ComponentToRender = SectionGlobalComparison;
+                                props.data = t.reportData.globalComparison;
                                 break;
                             case 'roadmap-2030':
                                 ComponentToRender = SectionRoadmap;
-                                props.data = t('reportData.roadmapData', { returnObjects: true });
+                                props.data = t.reportData.roadmapData;
                                 break;
                             case 'referencias':
                                 ComponentToRender = SectionReferencias;
-                                props.data = t('reportData.referencesData', { returnObjects: true });
+                                props.data = t.reportData.referencesData;
                                 break;
                         }
 
@@ -227,7 +256,7 @@ const App: React.FC = () => {
                     })}
                 </main>
             </div>
-            <AiAssistant translations={t('aiAssistant', { returnObjects: true })} />
+            <AiAssistant translations={t.aiAssistant} />
         </div>
     );
 };
